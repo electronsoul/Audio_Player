@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public void play(View view) {
         song.start();
         A.start();
+        setDuration();
     }
 
     //Pause Button on onClick
@@ -42,10 +43,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Stop Button onClick
+    @SuppressLint("SetTextI18n")
     public void stop(View view) {
         song.stop();
         song.release();
         song = null;
+        duration.setText("00:00");
     }
 
     //onConfigurationChange Method
@@ -53,6 +56,25 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @SuppressLint("SetTextI18n")
+    protected void setDuration(){
+        //To Display Song Duration
+        if ((float) song.getDuration() / 3600000 >= 1)
+            duration.setText(
+                    Integer.toString((int) ((float) song.getDuration() / 3600000))
+                            + ":" +
+                            Integer.toString((int) ((float) song.getDuration() / 60000))
+                            + ":" +
+                            Integer.toString((int) ((float) song.getDuration() / 1000))
+            );
+        else
+            duration.setText(
+                    Integer.toString((int) ((float) song.getDuration() / 60000))
+                            + ":" +
+                            Integer.toString((int) ((float) song.getDuration() / 1000))
+            );
     }
 
     //onCreate Method
@@ -78,21 +100,7 @@ public class MainActivity extends AppCompatActivity {
         //For Audio
         //audioManager = (AudioManager)getSystemService(AUDIO_SERVICE);
 
-        //To Display Song Duration
-        if ((float) song.getDuration() / 3600000 >= 1)
-            duration.setText(
-                    Integer.toString((int) ((float) song.getDuration() / 3600000))
-                    + ":" +
-                    Integer.toString((int) ((float) song.getDuration() / 60000))
-                    + ":" +
-                    Integer.toString((int) ((float) song.getDuration() / 1000))
-            );
-        else
-            duration.setText(
-                    Integer.toString((int) ((float) song.getDuration() / 60000))
-                    + ":" +
-                    Integer.toString((int) ((float) song.getDuration() / 1000))
-            );
+
 
         seekBar.setMax(song.getDuration()); //Setting SeekBar Max Value
         A = new Anim_Thread("RecordRotate",record); //Instantiate Animation Thread
