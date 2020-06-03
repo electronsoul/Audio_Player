@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Audio player</string>
+    <string name="prev">Rewind</string>
+    <string name="textview">00:00</string>
+    <string name="pause">Pause</string>
+    <string name="play">Play</string>
+    <string name="stop">Stop</string>
+    <string name="todo">TODO</string>
+    <string name="please_roate_your_device">PLEASE ROATE YOUR DEVICE</string>
+    <string name="ff">Fast Forward</string>
+</resources>
