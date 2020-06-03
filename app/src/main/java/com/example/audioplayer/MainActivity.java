@@ -61,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     protected void setDuration(){
         //To Display Song Duration
-        if ((float) song.getDuration() / 3600000 >= 1)
+        if ((float) song.getDuration() / 3600000 >= 1) {
+
+
             duration.setText(
                     Integer.toString((int) ((float) song.getDuration() / 3600000))
                             + ":" +
@@ -69,12 +71,14 @@ public class MainActivity extends AppCompatActivity {
                             + ":" +
                             Integer.toString((int) ((float) song.getDuration() / 1000))
             );
-        else
+        }
+        else {
             duration.setText(
                     Integer.toString((int) ((float) song.getDuration() / 60000))
                             + ":" +
                             Integer.toString((int) ((float) song.getDuration() / 1000))
             );
+        }
     }
 
     //onCreate Method
@@ -99,8 +103,6 @@ public class MainActivity extends AppCompatActivity {
 
         //For Audio
         //audioManager = (AudioManager)getSystemService(AUDIO_SERVICE);
-
-
 
         seekBar.setMax(song.getDuration()); //Setting SeekBar Max Value
         A = new Anim_Thread("RecordRotate",record); //Instantiate Animation Thread
